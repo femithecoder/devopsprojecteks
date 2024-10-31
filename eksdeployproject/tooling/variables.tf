@@ -1,94 +1,27 @@
-variable "ami_id" {
-  description = "The AMI ID for the instances"
-  type        = string
-  default     = "ami-0b8c6b923777519db"
-}
-
-variable "instance_type" {
-  description = "The instance type for the instances"
-  type        = string
-  default     = "t2.large"
-}
-
-
-variable "key_name" {
-  description = "The key name for the instances"
-  type        = string
-  default     = "DevOps_Train2024"
-}
-
-###########################
-#Sonaqube instance
-##########################
-variable "security_group_id" {
-  type    = string
-  default = "sg-07b8b3043804ede33"
-}
-
-# variable "subnet_id" {
-#   type    = string
-#   default = "subnet-036b6ddb502f8eb8a"
-# }
-
+variable "ami_id" {}
+variable "instance_type" {}
+variable "key_name" {}
 # variable "security_group_id" {
-#   description = "The security group ID to attach to the instance"
-#   type        = string
-
+#   default = 
 # }
-##################
-#sonarqube db 
-###################
-variable "subnet_id" {
-  description = "The subnet ID where the instance will be deployed"
-  type        = string
-  default     = "subnet-0ea3d234fba84eef9"
-}
-
-# variable "db_name" {
-#   description = "The name of the PostgreSQL database"
-#   type        = string
-#   default     = "sonarqube"
-# }
-
-# variable "db_username" {
-#   description = "The username for the PostgreSQL database"
-#   type        = string
-#   default     = "sonar"
-# }
-
-# variable "db_password" {
-#   description = "The password for the PostgreSQL database"
-#   type        = string
-#   sensitive   = true
-#   default     = "Team@123"
-# }
-
-# variable "db_security_group_id" {
-#   description = "The security group ID for the PostgreSQL database"
-#   type        = list(string)
-#   default     = ["sg-0f424207f7b50b172"]
-# }
-
-# variable "db_subnet_group" {
-#   description = "The subnet group for the PostgreSQL database"
-#   type        = string
-#   default     = "default-vpc-08dcf780b5e752f2c"
-# }
-
+variable "project_name" {}
+variable "vpc_cidr" {}
+variable "vpc_cidr_public_subnet" {}
+variable "vpc_cidr_private_subnet" {}
 variable "s3_bucket" {
   description = "The name of the S3 bucket for storing Terraform state"
   type        = string
-  default     = "terraform-state-bucket-fusi"
+  default     = "terraform-backend-bucket-eks-deploy-01"
 }
 
-variable "dynamodb_table" {
+variable "table" {
   description = "The name of the DynamoDB table for state locking"
   type        = string
   default     = "terraform-lock-table"
 }
 
-variable "main-region" {
-  description = "The AWS region to deploy resources"
-  type        = string
-  default     = "us-west-2"
-}
+variable "main-region" {}
+#variable "vpc_id_main" {}
+variable "vpc_cidr_main" {}
+variable "vpc_cidr_public_subnet_main" {}
+variable "vpc_cidr_private_subnet_main" {}

@@ -1,33 +1,43 @@
 resource "aws_s3_bucket" "terraform_state" {
   bucket = var.bucket
+  #region = var.main-region
+}
 
-  versioning {
-    enabled = true
-  }
+resource "aws_s3_bucket_server_side_encryption_configuration" "sse" {
+  bucket = aws_s3_bucket.terraform_state.id
 
-  server_side_encryption_configuration {
-    rule {
-      apply_server_side_encryption_by_default {
-        sse_algorithm = "AES256"
-      }
-    }
-  }
-
-  lifecycle_rule {
-    id      = "log"
-    enabled = true
-
-    transition {
-      days          = 30
-      storage_class = "GLACIER"
-    }
-
-    expiration {
-      days = 365
+  rule {
+    apply_server_side_encryption_by_default {
+      sse_algorithm = "AES256"
     }
   }
 }
+resource "aws_s3_bucket_versioning" "version" {
+  bucket = aws_s3_bucket.terraform_state.id
 
+  versioning_configuration {
+    status = "Enabled"
+  }
+}
+resource "aws_s3_bucket_lifecycle_configuration" "lifecycle_rule" {
+  bucket = aws_s3_bucket.terraform_state.id
+
+  rule {
+    id = "rule-1"
+  
+    filter {}
+
+    status = "Enabled"
+
+    transition {
+      days = 365
+      storage_class = "GLACIER"
+    }
+    # expiration {
+    #   days = 30
+    # }
+    }
+}
 resource "aws_dynamodb_table" "terraform_locks" {
   name         = var.table
   billing_mode = "PAY_PER_REQUEST"

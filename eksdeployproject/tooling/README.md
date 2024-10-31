@@ -1,4 +1,8 @@
 # Learn cicd tools deployment 
+1. ENSURE YOU HAVE YOU SCM TOOL CORRECTLY SET UP
+2. CREATE YOUR S3 BUCKET AND DYNAMODB
+3. 
+
 
 
 
