@@ -10,7 +10,7 @@ pipeline {
         stage('1.Terraform init') {
             steps {
                 echo 'terraform init phase'
-                dir('eks-terraform-deploy') {
+                dir('eksdeployproject/eks-terraform-deploy') {
                     sh 'terraform init'
                 }
             }
@@ -18,7 +18,7 @@ pipeline {
         stage('2.Terraform plan') {
             steps {
                 echo 'terraform plan phase'
-                dir('eks-terraform-deploy') {
+                dir('eksdeployproject/eks-terraform-deploy') {
                     sh 'AWS_REGION=eu-west-2 terraform plan'
                 }
             }
@@ -38,7 +38,7 @@ pipeline {
         stage('4.Terraform Deploy') {              
             steps { 
                 echo 'Terraform ${params.Deployment_Type} phase'  
-                dir('eks-terraform-deploy') {
+                dir('eksdeployproject/eks-terraform-deploy') {
                 sh "AWS_REGION=eu-west-2 terraform ${params.Deployment_Type} --auto-approve"
                 sh("""scripts/update-kubeconfig.sh""")
                 sh("""scripts/install_helm.sh""") 
