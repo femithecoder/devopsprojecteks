@@ -29,4 +29,3 @@ variable "private_subnets" {
 variable "rolearn" {
   description = "Add admin role to the aws-auth configmap"
 }
-

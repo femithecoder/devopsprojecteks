@@ -32,7 +32,7 @@ module "aws_alb_controller" {
   cluster_name = var.cluster_name
 
   vpc_id            = var.vpc_id
-  oidc_provider_arn = var.oidc_provider_arn
+  oidc_provider_arn = module.eks.oidc_provider_arn
 }
 
 # ################################################################################
