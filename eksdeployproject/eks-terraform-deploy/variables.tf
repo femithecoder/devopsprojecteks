@@ -7,13 +7,28 @@ variable "main-region" {
   type    = string
   default = "eu-west-2"
 }
-variable "vpc_cidr_main" {}
-variable "vpc_cidr_public_subnet_main" {}
-variable "vpc_cidr_private_subnet_main" {}
-variable "vpc_cidr" {}
-variable "vpc_cidr_public_subnet" {}
-variable "vpc_cidr_private_subnet" {}
-variable "project_name" {}
+variable "vpc_cidr_main" {
+  default = "100.0.0.0/16"
+}
+variable "vpc_cidr_public_subnet_main" {
+  default = "100.0.1.0/24"
+}
+variable "vpc_cidr_private_subnet_main" {
+  default = "100.0.0.0/24"
+}
+variable "vpc_cidr" {
+  default = "10.0.0.0/16"
+}
+variable "vpc_cidr_public_subnet" {
+  default = "10.0.0.0/24"
+}
+variable "vpc_cidr_private_subnet" {
+  default = "10.0.1.0/24"
+}
+
+variable "project_name" {
+  default = "eks_deploy"
+}
 
 # ################################################################################
 # # EKS Cluster Variables
