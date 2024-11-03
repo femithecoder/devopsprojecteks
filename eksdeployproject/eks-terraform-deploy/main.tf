@@ -2,9 +2,24 @@
 # # VPC Module
 # ################################################################################
 
-module "vpc" {
-  source      = "../../tooling/modules/vpc"
-  main-region = var.main-region
+module "eks_vpc" {
+  source = "./modules/vpc-eks"
+  main-region             = var.main-region
+  project_name            = var.project_name 
+  vpc_cidr                = var.vpc_cidr
+  vpc_cidr_private_subnet = var.vpc_cidr_private_subnet
+  vpc_cidr_public_subnet  = var.vpc_cidr_public_subnet
+  
+}
+#create vpc for other resources
+module "vpc_main" {
+  source = "./modules/vpc-main"
+  main-region                  = var.main-region
+  project_name                 = var.project_name 
+  vpc_cidr_main                = var.vpc_cidr_main
+  vpc_cidr_private_subnet_main = var.vpc_cidr_private_subnet_main
+  vpc_cidr_public_subnet_main  = var.vpc_cidr_public_subnet_main
+  
 }
 
 # ################################################################################

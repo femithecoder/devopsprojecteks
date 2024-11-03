@@ -7,7 +7,13 @@ variable "main-region" {
   type    = string
   default = "eu-west-2"
 }
-
+variable "vpc_cidr_main" {}
+variable "vpc_cidr_public_subnet_main" {}
+variable "vpc_cidr_private_subnet_main" {}
+variable "vpc_cidr" {}
+variable "vpc_cidr_public_subnet" {}
+variable "vpc_cidr_private_subnet" {}
+variable "project_name" {}
 
 # ################################################################################
 # # EKS Cluster Variables
