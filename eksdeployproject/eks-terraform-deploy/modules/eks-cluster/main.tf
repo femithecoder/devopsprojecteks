@@ -4,12 +4,15 @@
 
 module "eks" {
   source  = "terraform-aws-modules/eks/aws"
-  version = "~> 19.0"
+  version = "~> 18.0"
 
   cluster_name    = var.cluster_name
   cluster_version = "1.28"
 
   cluster_endpoint_public_access = true
+  # Enable OIDC provider creation
+  
+
 
   create_kms_key              = false
   create_cloudwatch_log_group = false
@@ -33,7 +36,8 @@ module "eks" {
   vpc_id                   = var.vpc_id
   subnet_ids               = var.private_subnets
   control_plane_subnet_ids = var.private_subnets
-
+  create_oidc_provider = true
+  
   # EKS Managed Node Group(s)
   eks_managed_node_group_defaults = {
     instance_types = ["m5.xlarge", "m5.large", "t3.medium"]
