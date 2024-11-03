@@ -3,7 +3,9 @@ resource "aws_vpc" "eks" {
   instance_tenancy = "default"
   enable_dns_hostnames = true
   
-
+  lifecycle {
+    prevent_destroy = true
+  }
   tags = {
     Name = "${var.project_name}-eks_vpc"
   }
@@ -18,6 +20,9 @@ resource "aws_subnet" "eks-public_subnet" {
   availability_zone = data.aws_availability_zones.availability_zones.names[0]
   map_public_ip_on_launch = true
 
+  lifecycle {
+    prevent_destroy = true
+  }
   tags = {
     Name = "my-vpc_public_subnet-eks"
   }
@@ -29,12 +34,20 @@ resource "aws_subnet" "eks-private_subnet" {
   availability_zone = data.aws_availability_zones.availability_zones.names[0]
   map_public_ip_on_launch = false
   
+  lifecycle {
+    prevent_destroy = true
+  }
+  
   tags = {
     Name = "my-vpc_private_subnet-eks"
   }
 }
 resource "aws_internet_gateway" "eks-igw" {
   vpc_id = aws_vpc.eks.id
+
+  lifecycle {
+    prevent_destroy = true
+  }
 
   tags = {
     Name = "${var.project_name}-igw-eks"
@@ -43,6 +56,10 @@ resource "aws_internet_gateway" "eks-igw" {
 #create your public route-table
 resource "aws_route_table" "eks-public_route_table" {
   vpc_id = aws_vpc.eks.id
+
+  lifecycle {
+    prevent_destroy = true
+  }
 
   route {
     cidr_block = "0.0.0.0/0"
@@ -56,11 +73,17 @@ resource "aws_route_table" "eks-public_route_table" {
 resource "aws_route_table_association" "aws-rt" {
   subnet_id = aws_subnet.eks-public_subnet.id
   route_table_id = aws_route_table.eks-public_route_table.id
+  lifecycle {
+    prevent_destroy = true
+  }
 }
 
 resource "aws_eip" "eks-my_eip" {
   domain = "vpc"
 
+  lifecycle {
+    prevent_destroy = true
+  }
   tags = {
     Name = "my-vpc_eip-eks"
   }
@@ -69,9 +92,17 @@ resource "aws_eip" "eks-my_eip" {
 resource "aws_nat_gateway" "eks-main-ng" {
   allocation_id = aws_eip.eks-my_eip.id
   subnet_id = aws_subnet.eks-public_subnet.id
+
+  lifecycle {
+    prevent_destroy = true
+  }
 }
 resource "aws_route_table" "eks-private_route_table" {
   vpc_id = aws_vpc.eks.id
+
+  lifecycle {
+    prevent_destroy = true
+  }
 
   route {
     cidr_block = "0.0.0.0/0"
@@ -84,5 +115,9 @@ resource "aws_route_table" "eks-private_route_table" {
 resource "aws_route_table_association" "aws-rt2" {
   subnet_id = aws_subnet.eks-private_subnet.id
   route_table_id = aws_route_table.eks-private_route_table.id
+
+  lifecycle {
+    prevent_destroy = true
+  }
 }
 
