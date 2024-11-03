@@ -20,7 +20,7 @@ pipeline {
                     
                     // Select AWS credentials based on the environment
                     if (env.TF_VAR_ENV == 'dev') {
-                        env.AWS_CREDENTIALS = 'aws-dev-credentials'
+                        env.AWS_CREDENTIALS = 'aws-credentials'
                     } else if (env.TF_VAR_ENV == 'qa') {
                         env.AWS_CREDENTIALS = 'aws-qa-credentials'
                     } else if (env.TF_VAR_ENV == 'staging') {
