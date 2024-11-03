@@ -94,4 +94,40 @@ module "aws_alb_controller" {
 #   grafana_security_group_id = module.managed_grafana.security_group_id
 # }
 
+#create security group for other resources aside eks
+module "security_groups" {
+  source = "./modules/security-group"
+  vpc_id_main = module.vpc_main.vpc_id_main
+  vpc_id_eks = module.eks_vpc.vpc_id
+}
+module "jenkins-server" {
+  source        = "./modules/jenkins-server"
+  ami_id        = var.ami_id
+  instance_type = var.instance_type
+  key_name      = var.key_name
+  main-region   = var.main-region
+  security_group_id = module.security_groups.security_groups
+  subnet_id = module.vpc_main.public_subnet_main
 
+}
+
+module "terraform-node" {
+  source        = "./modules/terraform-node"
+  ami_id        = var.ami_id
+  instance_type = var.instance_type
+  key_name      = var.key_name
+  main-region   = var.main-region
+  subnet_id     = module.eks_vpc.public_subnet
+  security_group = module.security_groups.security_groups_eks
+  
+}
+
+module "maven-sonarqube-server" {
+  source            = "./modules/maven-sonarqube-server"
+  ami_id            = var.ami_id
+  instance_type     = var.instance_type
+  key_name          = var.key_name
+  security_group_id = module.security_groups.security_groups
+  subnet_id         = module.vpc_main.public_subnet_main
+  main-region       = var.main-region
+}

@@ -103,3 +103,12 @@ variable "private_subnets" {
 # }
 
 
+variable "ami_id" {
+  default = "ami-0e8d228ad90af673b"
+}
+variable "instance_type" {
+  default = "t2.large"
+}
+variable "key_name" {
+  default = "my-key-pair"
+}
