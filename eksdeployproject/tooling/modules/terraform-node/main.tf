@@ -10,6 +10,6 @@ resource "aws_instance" "terraform_node" {
     Name = "terraform-node"
   }
   lifecycle {
-    prevent_destroy = true
+    prevent_destroy = false
   }
 }

@@ -44,7 +44,7 @@ module "maven-sonarqube-server" {
 #   project_name = var.project_name
 # }
 
-# #create vpc for eks
+#create vpc for eks
 module "eks_vpc" {
   source = "./modules/vpc-eks"
   main-region             = var.main-region

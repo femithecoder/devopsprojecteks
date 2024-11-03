@@ -24,19 +24,19 @@ resource "aws_s3_bucket_lifecycle_configuration" "lifecycle_rule" {
 
   rule {
     id = "rule-1"
-  
+
     filter {}
 
     status = "Enabled"
 
     transition {
-      days = 365
+      days          = 365
       storage_class = "GLACIER"
     }
     # expiration {
     #   days = 30
     # }
-    }
+  }
 }
 resource "aws_dynamodb_table" "terraform_locks" {
   name         = var.table

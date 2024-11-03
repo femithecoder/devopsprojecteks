@@ -15,7 +15,7 @@ resource "aws_instance" "sonarqube" {
     Name = "Maven-Sonarqube-Server"
   }
   lifecycle {
-    prevent_destroy = true
+    prevent_destroy = false
   }
 }
 
