@@ -15,6 +15,7 @@ module "eks" {
   source = "./modules/eks-cluster"
 
   rolearn = var.rolearn
+  
 
   vpc_id          = var.vpc_id
   private_subnets = var.private_subnets
