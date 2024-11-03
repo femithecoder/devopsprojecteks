@@ -4,7 +4,7 @@
 
 module "eks" {
   source  = "terraform-aws-modules/eks/aws"
-  version = "~> 18.0"
+  version = "~> 19.0"
 
   cluster_name    = var.cluster_name
   cluster_version = "1.28"
@@ -16,7 +16,7 @@ module "eks" {
 
   create_kms_key              = false
   create_cloudwatch_log_group = false
-  cluster_encryption_config   = {}
+  cluster_encryption_config   = []
 
   cluster_addons = {
     coredns = {
