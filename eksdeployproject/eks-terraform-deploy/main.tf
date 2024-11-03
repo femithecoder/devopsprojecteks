@@ -2,10 +2,10 @@
 # # VPC Module
 # ################################################################################
 
-# module "vpc" {
-#   source      = "./modules/vpc"
-#   main-region = var.main-region
-# }
+module "vpc" {
+  source      = "../../tooling/modules/vpc"
+  main-region = var.main-region
+}
 
 # ################################################################################
 # # EKS Cluster Module
