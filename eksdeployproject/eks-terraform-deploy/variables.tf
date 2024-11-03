@@ -48,11 +48,11 @@ variable "env_name" {
 #   description = "The Cluster certificate data"
 # }
 
-# variable "oidc_provider_arn" {
-#   description = "OIDC Provider ARN used for IRSA "
-#   type        = string
-#   sensitive   = true
-# }
+variable "oidc_provider_arn" {
+  description = "OIDC Provider ARN used for IRSA "
+  type        = string
+  sensitive   = true
+}
 
 # ################################################################################
 # # VPC Variables
@@ -65,9 +65,9 @@ variable "vpc_id" {
 }
 
 variable "private_subnets" {
-  description = "A list of private subnets"
-  type        = string
-  default = "subnet-0944528b64f5bcc24"
+  description = "VPC Private Subnets which EKS cluster is deployed in"
+  type        = list(string)
+  default = ["subnet-02fb3471f7ccfbafa"]
 }
 
 ################################################################################
