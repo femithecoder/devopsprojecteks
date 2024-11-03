@@ -48,11 +48,11 @@ variable "env_name" {
 #   description = "The Cluster certificate data"
 # }
 
-variable "oidc_provider_arn" {
-  description = "OIDC Provider ARN used for IRSA "
-  type        = string
-  sensitive   = true
-}
+# variable "oidc_provider_arn" {
+#   description = "OIDC Provider ARN used for IRSA "
+#   type        = string
+#   sensitive   = true
+# }
 
 # ################################################################################
 # # VPC Variables
