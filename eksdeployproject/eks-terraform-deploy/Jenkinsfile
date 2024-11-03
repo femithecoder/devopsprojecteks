@@ -11,7 +11,7 @@ pipeline {
             steps {
                 echo 'terraform init phase'
                 dir('eksdeployproject/eks-terraform-deploy') {
-                    sh 'terraform init -reconfigure'
+                    sh 'terraform init'
                 }
             }
         }
