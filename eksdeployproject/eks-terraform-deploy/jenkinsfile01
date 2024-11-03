@@ -35,9 +35,7 @@ pipeline {
         stage('2. Terraform Init') {
             steps {
                 withCredentials([[$class: 'AmazonWebServicesCredentialsBinding', credentialsId: env.AWS_CREDENTIALS]]) {
-                    sh """
-                        terraform init -backend-config="path/to/backend-config-${TF_VAR_ENV}.tf"
-                    """
+                    sh ("""terraform init -backend-config="path/to/backend-config-${TF_VAR_ENV}.tf""")
                 }
             }
         }
@@ -45,9 +43,7 @@ pipeline {
         stage('3. Terraform Plan') {
             steps {
                 withCredentials([[$class: 'AmazonWebServicesCredentialsBinding', credentialsId: env.AWS_CREDENTIALS]]) {
-                    sh """
-                        terraform plan -var-file="vars/${TF_VAR_ENV}.tfvars"
-                    """
+                    sh ("""terraform plan -var-file="vars/${TF_VAR_ENV}.tfvars""")   
                 }
             }
         }
