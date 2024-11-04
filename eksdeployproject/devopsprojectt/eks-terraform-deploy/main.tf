@@ -3,7 +3,7 @@
 # ################################################################################
 
 # module "vpc" {
-#   source      = "./modules/vpc"
+#   source      = "..modules/vpc"
 #   main-region = var.main-region
 # }
 
