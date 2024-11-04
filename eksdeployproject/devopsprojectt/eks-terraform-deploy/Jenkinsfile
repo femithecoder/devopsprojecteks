@@ -19,7 +19,7 @@ pipeline {
             steps {
                 dir('eksdeployproject/devopsprojectt/eks-terraform-deploy') {
                     echo 'terraform plan phase'
-                    sh 'AWS_REGION=eu-west-2 terraform plan --lock=false'
+                    sh 'AWS_REGION=eu-west-2 terraform plan'
                 }
             }
         }
