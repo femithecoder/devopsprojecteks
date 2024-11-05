@@ -26,9 +26,9 @@ variable "private_subnets" {
 # Variables defined using Environment Variables
 ################################################################################
 
-# variable "rolearn" {
-#   description = "Add admin role to the aws-auth configmap"
-# }
+variable "rolearn" {
+  description = "Add admin role to the aws-auth configmap"
+}
 
 variable "main-region" {
   default = "eu-west-2"
