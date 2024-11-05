@@ -88,5 +88,5 @@ variable "vpc_id" {
 variable "private_subnets" {
   description = "VPC Private Subnets which EKS cluster is deployed in"
   type        = list(any)
-  default = [ "subnet-0b011401e6a321e0f" ]
+  default = [ "subnet-0b011401e6a321e0f","subnet-03af90d812469d045" ]
 }
