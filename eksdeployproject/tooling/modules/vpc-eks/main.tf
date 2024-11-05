@@ -100,19 +100,3 @@ resource "aws_route_table_association" "aws-rt2" {
 
   }
 
-resource "aws_subnet" "eks-private_subnet_01" {
-  vpc_id = aws_vpc.eks.id
-  cidr_block = var.vpc_cidr_private_subnet
-  availability_zone = data.aws_availability_zones.availability_zones.names[0]
-  map_public_ip_on_launch = false
-  
-  
-  
-  tags = {
-    Name = "my-vpc_private_subnet-eks_01"
-  }
-}
-resource "aws_route_table_association" "aws-rt2" {
-  subnet_id = aws_subnet.eks-private_subnet_01.id
-  route_table_id = aws_route_table.eks-private_route_table.id
-}
