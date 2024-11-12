@@ -4,7 +4,7 @@ pipeline {
         choice(name: 'Deployment_Type', choices: ['apply', 'destroy'], description: 'The deployment type')
     }
     environment {
-        EMAIL_TO = 'olorunfemilawal47@gmail.com'
+        EMAIL_TO = 'femithecoder@gmail.com'
     }
     stages {
         stage('1.Terraform init') {
@@ -35,8 +35,8 @@ pipeline {
                 dir('eksdeployproject/devopsprojectt/eks-terraform-deploy') {
                     echo "Terraform ${params.Deployment_Type} phase"
                     sh "AWS_REGION=eu-west-2 terraform ${params.Deployment_Type} --auto-approve"
-                    sh 'scripts/update-kubeconfig.sh'
-                    sh 'scripts/install_helm.sh'
+                    //sh 'scripts/update-kubeconfig.sh'
+                    //sh 'scripts/install_helm.sh'
                 }
             }
         }
@@ -49,7 +49,7 @@ pipeline {
                      Dominion System Technologies,
                      +1 (313) 413-1477''', 
                      cc: EMAIL_TO, 
-                     from: 'olorunfemilawal47@gmail.com', // Add a valid sender email
+                     from: 'femithecoder@gmail.com', // Add a valid sender email
                      replyTo: '', 
                      subject: 'Terraform Infra deployment completed!!!', 
                      to: EMAIL_TO

@@ -13,13 +13,13 @@ variable "cluster_name" {
 variable "vpc_id" {
   description = "VPC ID which EKS cluster is deployed in"
   type        = string
-  default = "vpc-0d08fd8fcd58772d7"
+  default = "vpc-0e651b74bcad86f27"
 }
 
 variable "private_subnets" {
   description = "VPC Private Subnets which EKS cluster is deployed in"
   type        = list(any)
-  default = [ "subnet-07b6dd674426d566a","subnet-03af90d812469d045" ]
+  default = [ "subnet-06cf6c2e05d8e1cad","subnet-0de3efc28813a5813" ]
 }
 
 ################################################################################
@@ -28,6 +28,7 @@ variable "private_subnets" {
 
 variable "rolearn" {
   description = "Add admin role to the aws-auth configmap"
+  type = string
 }
 
 variable "main-region" {

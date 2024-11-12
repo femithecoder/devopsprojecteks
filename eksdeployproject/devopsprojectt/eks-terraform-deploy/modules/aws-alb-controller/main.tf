@@ -7,6 +7,7 @@ module "lb_role" {
 
   role_name                              = "${var.env_name}_eks_lb"
   attach_load_balancer_controller_policy = true
+  
 
   oidc_providers = {
     main = {
