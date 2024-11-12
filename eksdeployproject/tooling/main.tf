@@ -52,6 +52,7 @@ module "eks_vpc" {
   vpc_cidr                = var.vpc_cidr
   vpc_cidr_private_subnet = var.vpc_cidr_private_subnet
   vpc_cidr_public_subnet  = var.vpc_cidr_public_subnet
+  vpc_cidr_private_subnet_01 = var.vpc_cidr_private_subnet_01
 }
 #create vpc for other resources
 module "vpc_main" {

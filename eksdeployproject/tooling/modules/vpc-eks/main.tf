@@ -26,16 +26,28 @@ resource "aws_subnet" "eks-public_subnet" {
   }
 
 }
-resource "aws_subnet" "eks-private_subnet" {
+resource "aws_subnet" "eks-private_subnet_01" {
   vpc_id = aws_vpc.eks.id
   cidr_block = var.vpc_cidr_private_subnet
-  availability_zone = data.aws_availability_zones.availability_zones.names[0]
+  availability_zone = data.aws_availability_zones.availability_zones.names[1]
   map_public_ip_on_launch = false
   
   
   
   tags = {
-    Name = "my-vpc_private_subnet-eks"
+    Name = "my-vpc_private_subnet-eks_01"
+  }
+}
+resource "aws_subnet" "eks-private_subnet_02" {
+  vpc_id = aws_vpc.eks.id
+  cidr_block = var.vpc_cidr_private_subnet_01
+  availability_zone = data.aws_availability_zones.availability_zones.names[2]
+  map_public_ip_on_launch = false
+  
+  
+  
+  tags = {
+    Name = "my-vpc_private_subnet-eks_02"
   }
 }
 resource "aws_internet_gateway" "eks-igw" {
@@ -95,8 +107,12 @@ resource "aws_route_table" "eks-private_route_table" {
   }
 }
 resource "aws_route_table_association" "aws-rt2" {
-  subnet_id = aws_subnet.eks-private_subnet.id
+  subnet_id = aws_subnet.eks-private_subnet_01.id
   route_table_id = aws_route_table.eks-private_route_table.id
 
   }
+resource "aws_route_table_association" "aws-rt3" {
+  subnet_id = aws_subnet.eks-private_subnet_02.id
+  route_table_id = aws_route_table.eks-private_route_table.id
 
+  }

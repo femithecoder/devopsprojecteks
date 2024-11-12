@@ -191,8 +191,6 @@ sudo apt update && sudo apt upgrade -y
 # echo "sonarqube is now accessible via https://sonarqube.olorunfemilawal.com"
 
 
-
-
 # Update existing package list
 sudo apt update -y
 
