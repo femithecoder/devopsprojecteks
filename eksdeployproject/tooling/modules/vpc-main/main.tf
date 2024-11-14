@@ -49,7 +49,7 @@ resource "aws_route_table" "main-public_route_table" {
     gateway_id = aws_internet_gateway.main-igw.id
   }
   tags = {
-    Name = "public-route-table-eks"
+    Name = "public-route-table-main"
   }
 }
 
