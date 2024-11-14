@@ -13,7 +13,7 @@ module "eks" {
 
   create_kms_key              = false
   create_cloudwatch_log_group = false
-  //cluster_encryption_config   = {}
+  cluster_encryption_config   = {}
 
   cluster_addons = {
     coredns = {
@@ -31,9 +31,8 @@ module "eks" {
   }
 
   vpc_id                   = var.vpc_id
-  subnet_ids              = var.private_subnets
+  subnet_ids               = var.private_subnets
   control_plane_subnet_ids = var.private_subnets
-  
 
   # EKS Managed Node Group(s)
   eks_managed_node_group_defaults = {
@@ -65,10 +64,10 @@ module "eks" {
 
   aws_auth_roles = [
     {
-      rolearn  = "arn:aws:iam::548570664128:role/ec2-connect"
-      username = "ec2-connect"
+      rolearn  = var.rolearn
+      username = "femi"
       groups   = ["system:masters"]
-    }
+    },
   ]
 
   tags = {
@@ -122,4 +121,3 @@ resource "kubernetes_namespace" "analytics" {
     name = "analytics"
   }
 }
-

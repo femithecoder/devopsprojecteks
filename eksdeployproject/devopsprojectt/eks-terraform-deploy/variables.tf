@@ -79,14 +79,14 @@ variable "env_name" {
 #   default     = "b4f8f4f8-e011-7046-0637-993dc10edd76"
 # }
 
-variable "vpc_id" {
-  description = "VPC ID which EKS cluster is deployed in"
-  type        = string
-  default = "vpc-0e651b74bcad86f27"
-}
+# variable "vpc_id" {
+#   description = "VPC ID which EKS cluster is deployed in"
+#   type        = string
+#   default = "vpc-0e651b74bcad86f27"
+# }
 
-variable "private_subnets" {
-  description = "VPC Private Subnets which EKS cluster is deployed in"
-  type        = list(any)
-  default = [ "subnet-06cf6c2e05d8e1cad","subnet-0de3efc28813a5813" ]
-}
+# variable "private_subnets" {
+#   description = "VPC Private Subnets which EKS cluster is deployed in"
+#   type        = list(any)
+#   default = [ "subnet-06cf6c2e05d8e1cad","subnet-0de3efc28813a5813" ]
+# }
