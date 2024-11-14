@@ -5,10 +5,10 @@ variable "key_name" {}
 #   default = 
 # }
 variable "project_name" {}
-variable "vpc_cidr" {}
-variable "vpc_cidr_public_subnet" {}
-variable "vpc_cidr_private_subnet" {}
-variable "vpc_cidr_private_subnet_01" {}
+# variable "vpc_cidr" {}
+# variable "vpc_cidr_public_subnet" {}
+# variable "vpc_cidr_private_subnet" {}
+# variable "vpc_cidr_private_subnet_01" {}
 variable "s3_bucket" {
   description = "The name of the S3 bucket for storing Terraform state"
   type        = string

@@ -13,7 +13,7 @@ module "eks" {
 
   create_kms_key              = false
   create_cloudwatch_log_group = false
-  cluster_encryption_config   = {}
+  //cluster_encryption_config   = {}
 
   cluster_addons = {
     coredns = {
