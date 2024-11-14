@@ -9,14 +9,18 @@ pipeline {
     stages {
         stage('1.Terraform init') {
             steps {
+                dir('eksdeployproject/devopsprojectt/eks-terraform-deploy'){
                 echo 'terraform init phase'
                 sh 'terraform init'
+                }
             }
         }
         stage('2.Terraform plan') {
             steps {
+                dir('eksdeployproject/devopsprojectt/eks-terraform-deploy'){
                 echo 'terraform plan phase'
                 sh 'AWS_REGION=eu-west-2 terraform plan'
+                }
             }
         }
         stage('3.Manual Approval') {
@@ -33,11 +37,13 @@ pipeline {
         }
         stage('4.Terraform Deploy') {              
             steps { 
+                dir('eksdeployproject/devopsprojectt/eks-terraform-deploy'){
                 echo 'Terraform ${params.Deployment_Type} phase'  
                 sh 'chmod +x scripts/update-kubeconfig.sh'
                 sh 'ls -l scripts/update-kubeconfig.sh'  
                 sh "AWS_REGION=eu-west-2 terraform ${params.Deployment_Type} --auto-approve"
-                sh("""scripts/update-kubeconfig.sh""")                   
+                sh("""scripts/update-kubeconfig.sh""")       
+                }            
                 }
                 }
         stage ('5. Email Notification') {
