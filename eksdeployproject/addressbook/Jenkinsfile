@@ -49,7 +49,7 @@ pipeline {
           sh "aws ecr get-login-password --region eu-west-2 | sudo docker login --username AWS --password-stdin ${aws_account}.dkr.ecr.us-west-2.amazonaws.com"
           sh "sudo docker build -t addressbook ."
           sh "sudo docker tag addressbook:latest ${aws_account}.dkr.ecr.eu-west-2.amazonaws.com/addressbookapp:${params.ecr_tag}"
-          sh "sudo docker push ${aws_account}.dkr.ecr.us-west-2.amazonaws.com/addressbookapp:${params.ecr_tag}"
+          sh "sudo docker push ${aws_account}.dkr.ecr.eu-west-2.amazonaws.com/addressbookapp:${params.ecr_tag}"
         }
       }
     }
