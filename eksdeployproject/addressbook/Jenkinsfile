@@ -13,12 +13,14 @@ pipeline {
     stages {
     stage('1. Git Checkout') {
       steps {
-        git branch: 'dev', credentialsId: 'GitHub_cred', url: 'https://github.com/ndiforfusi/addressbook.git'
+        git branch: 'dev', credentialsId: 'GitHub_cred', url: 'https://github.com/femithecoder/devopsprojecteks.git'
       }
     }
     stage('2. Build with Maven') { 
       steps {
+        dir('eksdeployproject/addressbook'){
         sh "mvn clean package"
+        }
       }
     }
     stage('3. SonarQube Analysis') {
@@ -26,42 +28,50 @@ pipeline {
                 scannerHome = tool 'SonarQube-Scanner-6.2.1'
             }
             steps {
+              dir('eksdeployproject/addressbook'){
               withCredentials([string(credentialsId: 'sonarqube-token', variable: 'SONAR_TOKEN')]) {
                       sh """
                       ${scannerHome}/bin/sonar-scanner  \
-                      -Dsonar.projectKey=addressbook-application \
-                      -Dsonar.projectName='addressbook-application' \
-                      -Dsonar.host.url=https://sonarqube.dominionsystem.org \
+                      -Dsonar.projectKey=addressbookapp \
+                      -Dsonar.projectName='addressbookapp' \
+                      -Dsonar.host.url=https://sonarqube.olorunfemilawal.com \
                       -Dsonar.token=${SONAR_TOKEN} \
                       -Dsonar.sources=src/main/java/ \
                       -Dsonar.java.binaries=target/classes \
                      """
                   }
+                }
               }
         }
     stage('4. Docker Image Build') {
       steps {
-          sh "aws ecr get-login-password --region us-west-2 | sudo docker login --username AWS --password-stdin ${aws_account}.dkr.ecr.us-west-2.amazonaws.com"
+        dir('eksdeployproject/addressbook'){
+          sh "aws ecr get-login-password --region eu-west-2 | sudo docker login --username AWS --password-stdin ${aws_account}.dkr.ecr.us-west-2.amazonaws.com"
           sh "sudo docker build -t addressbook ."
-          sh "sudo docker tag addressbook:latest ${aws_account}.dkr.ecr.us-west-2.amazonaws.com/addressbook:${params.ecr_tag}"
-          sh "sudo docker push ${aws_account}.dkr.ecr.us-west-2.amazonaws.com/addressbook:${params.ecr_tag}"
+          sh "sudo docker tag addressbook:latest ${aws_account}.dkr.ecr.eu-west-2.amazonaws.com/addressbookapp:${params.ecr_tag}"
+          sh "sudo docker push ${aws_account}.dkr.ecr.us-west-2.amazonaws.com/addressbookapp:${params.ecr_tag}"
+        }
       }
     }
 
     stage('5. Application Deployment in EKS') {
       steps {
+        dir('eksdeployproject/addressbook'){
         kubeconfig(caCertificate: '', credentialsId: 'kubeconfig', serverUrl: '') {
           sh "kubectl apply -f manifest"
+          }
         }
       }
     }
 
     stage('6. Monitoring Solution Deployment in EKS') {
       steps {
+        dir('eksdeployproject/addressbook'){
         kubeconfig(caCertificate: '', credentialsId: 'kubeconfig', serverUrl: '') {
           sh "kubectl apply -k monitoring"
           sh("""script/install_helm.sh""") 
           sh("""script/install_prometheus.sh""") 
+          }
         }
       }
     }
@@ -74,7 +84,7 @@ pipeline {
          Thanks,
          Dominion System Technologies,
          +1 (313) 413-1477''', 
-         subject: 'Application was Successfully Deployed!!', to: 'fusisoft@gmail.com'
+         subject: 'Application was Successfully Deployed!!', to: 'femithecoder@gmail.com'
       }
     }
   }
