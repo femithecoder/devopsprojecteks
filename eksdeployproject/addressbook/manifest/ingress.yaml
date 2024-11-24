@@ -25,7 +25,5 @@ spec:
             name: addressbook-service
             port:
               number: 8080
-tls:
-  - hosts:
-    - olorunfemilawal.com
+
 
