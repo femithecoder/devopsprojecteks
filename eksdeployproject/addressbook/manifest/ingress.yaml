@@ -16,14 +16,14 @@ metadata:
 spec:
   ingressClassName: alb
   rules:
-  - host: address.olorunfemilawal.com
+  - host: olorunfemilawal.com
     http:
       paths:
       - path: /static/*
         pathType: Prefix
         backend:
           service:
-            name: addressbook-app-service
+            name: addressbook-service
             port:
               number: 8080
 
