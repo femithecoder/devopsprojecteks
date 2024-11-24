@@ -13,7 +13,7 @@ pipeline {
     stages {
     stage('1. Git Checkout') {
       steps {
-        git branch: 'dev', credentialsId: 'GitHub_cred', url: 'https://github.com/femithecoder/devopsprojecteks.git'
+        git branch: 'dev', credentialsId: 'git_cred', url: 'https://github.com/femithecoder/devopsprojecteks.git'
       }
     }
     stage('2. Build with Maven') { 
@@ -32,8 +32,8 @@ pipeline {
               withCredentials([string(credentialsId: 'sonarqube-token', variable: 'SONAR_TOKEN')]) {
                       sh """
                       ${scannerHome}/bin/sonar-scanner  \
-                      -Dsonar.projectKey=addressbookapp \
-                      -Dsonar.projectName='addressbookapp' \
+                      -Dsonar.projectKey=address-book \
+                      -Dsonar.projectName='address book' \
                       -Dsonar.host.url=https://sonarqube.olorunfemilawal.com \
                       -Dsonar.token=${SONAR_TOKEN} \
                       -Dsonar.sources=src/main/java/ \
