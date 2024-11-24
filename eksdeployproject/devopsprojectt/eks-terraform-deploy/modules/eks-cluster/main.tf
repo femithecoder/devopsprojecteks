@@ -67,7 +67,7 @@ module "eks" {
       rolearn  = var.rolearn
       username = "femi"
       groups   = ["system:masters"]
-    },
+    }
   ]
 
   tags = {
