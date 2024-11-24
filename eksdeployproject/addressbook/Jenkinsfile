@@ -32,9 +32,9 @@ pipeline {
               withCredentials([string(credentialsId: 'sonarqube-token', variable: 'SONAR_TOKEN')]) {
                       sh """
                       ${scannerHome}/bin/sonar-scanner  \
-                      -Dsonar.projectKey=address-book \
-                      -Dsonar.projectName='address book' \
-                      -Dsonar.host.url=https://sonarqube.olorunfemilawal.com \
+                      -Dsonar.projectKey=addressbookapp \
+                      -Dsonar.projectName='addressbookapp' \
+                      -Dsonar.host.url=https://sonarqube.olorunfemilawal.com \                      
                       -Dsonar.token=${SONAR_TOKEN} \
                       -Dsonar.sources=src/main/java/ \
                       -Dsonar.java.binaries=target/classes \
@@ -79,7 +79,7 @@ pipeline {
     stage('7. Email Notification') {
       steps {
         mail bcc: 'fusisoft@gmail.com', body: '''Build is Over. Check the application using the URL below:
-         https://app.dominionsystem.org/addressbook-1.0
+         https://olorunfemilawal.com/addressbook-1.0
          Let me know if the changes look okay.
          Thanks,
          Dominion System Technologies,
