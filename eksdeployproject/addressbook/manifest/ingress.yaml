@@ -16,10 +16,9 @@ metadata:
 spec:
   ingressClassName: alb
   rules:
-  - host: olorunfemilawal.com
-    http:
+  - http:
       paths:
-      - path: /
+      - path: /addressbook-1.0
         pathType: Prefix
         backend:
           service:
