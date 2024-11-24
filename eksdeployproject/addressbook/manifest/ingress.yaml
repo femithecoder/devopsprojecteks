@@ -6,9 +6,9 @@ metadata:
   annotations:
     alb.ingress.kubernetes.io/scheme: internet-facing
     alb.ingress.kubernetes.io/certificate-arn: arn:aws:acm:eu-west-2:548570664128:certificate/6a571775-3636-44a1-9f85-1788e492584c
-    alb.ingress.kubernetes.io/listen-ports: '[{"HTTPS": 80, "HTTPS": 443}]'
+    alb.ingress.kubernetes.io/listen-ports: '[{"HTTPS": 443}]'
     alb.ingress.kubernetes.io/target-type: ip
-    alb.ingress.kubernetes.io/healthcheck-port: "8080" # Updated to match the service port
+    alb.ingress.kubernetes.io/healthcheck-port: "8080" 
     alb.ingress.kubernetes.io/healthcheck-path: /addressbook-1.0
     alb.ingress.kubernetes.io/success-codes: "200,302"
     alb.ingress.kubernetes.io/load-balancer-name: addressbook-server-ip
