@@ -19,7 +19,7 @@ spec:
   - host: olorunfemilawal.com
     http:
       paths:
-      - path: /static/*
+      - path: /
         pathType: Prefix
         backend:
           service:
