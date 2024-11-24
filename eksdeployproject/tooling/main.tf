@@ -23,7 +23,7 @@ module "terraform-node" {
 module "maven-sonarqube-server" {
   source            = "./modules/maven-sonarqube-server"
   ami_id            = var.ami_id
-  instance_type     = var.instance_type
+  instance_type_extra = var.instance_type_extra
   key_name          = var.key_name
   security_group_id = module.security_groups.security_groups
   subnet_id         = module.vpc_main.public_subnet_main

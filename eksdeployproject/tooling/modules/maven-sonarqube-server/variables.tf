@@ -1,6 +1,6 @@
 variable "ami_id" {}
 
-variable "instance_type" {}
+variable "instance_type_extra" {}
 
 variable "key_name" {}
 

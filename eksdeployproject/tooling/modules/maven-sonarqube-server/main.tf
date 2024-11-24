@@ -4,7 +4,7 @@
 
 resource "aws_instance" "sonarqube" {
   ami                         = var.ami_id
-  instance_type               = var.instance_type
+  instance_type               = var.instance_type_extra
   key_name                    = var.key_name
   security_groups      = [var.security_group_id]
   subnet_id                   = var.subnet_id
