@@ -27,7 +27,7 @@ variable "private_subnets" {
 variable "rolearn" {
   description = "Add admin role to the aws-auth configmap"
   type = string
-  default = "arn:aws:iam::548570664128:role/ec2-connect"
+  
 }
 
 variable "main-region" {
