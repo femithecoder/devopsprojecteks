@@ -16,7 +16,7 @@ metadata:
 spec:
   ingressClassName: alb
   rules:
-  - http:
+  - https:
       paths:
       - path: /addressbook-1.0
         pathType: Prefix
