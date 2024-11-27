@@ -20,20 +20,3 @@ spec:
         image: 548570664128.dkr.ecr.eu-west-2.amazonaws.com/addressbookapp:1.7.0
         ports:
         - containerPort: 8080
-        readinessProbe:
-          httpGet:
-            path: /
-            port: 8080
-          initialDelaySeconds: 20 # Increased to ensure the app is ready
-          periodSeconds: 10 # Probing every 10 seconds
-          failureThreshold: 3 # Fail after 3 consecutive failures
-          successThreshold: 1 # Mark as ready after 1 successful check
-        livenessProbe:
-          httpGet:
-            path: /
-            port: 8080
-          initialDelaySeconds: 60 # Delayed to give the app enough time to start
-          periodSeconds: 30 # Probing every 30 seconds
-          failureThreshold: 5 # Restart after 5 consecutive failures
-         
-
