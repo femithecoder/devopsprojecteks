@@ -1,4 +1,4 @@
-# Complete Manifest Where in single yml we defined Deployment & Service for SpringApp & PVC(with default  StorageClass),ReplicaSet & Service For Mongo.
+# Deployment Configuration
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -20,3 +20,44 @@ spec:
         image: 548570664128.dkr.ecr.eu-west-2.amazonaws.com/addressbookapp:1.7.0
         ports:
         - containerPort: 8080
+        readinessProbe: 
+          httpGet:
+            path: /
+            port: 8080
+          initialDelaySeconds: 20
+          periodSeconds: 10
+        livenessProbe:
+          httpGet:
+            path: /
+            port: 8080
+          initialDelaySeconds: 60
+          periodSeconds: 30
+        resources:
+          requests:
+            memory: "512Mi" # Minimum memory requested by the container
+            cpu: "250m"     # Minimum CPU requested
+          limits:
+            memory: "1Gi"   # Maximum memory allocated
+            cpu: "500m"     # Maximum CPU allocated
+        volumeMounts:
+        - name: addressbook-storage
+          mountPath: /data
+      volumes:
+      - name: addressbook-storage
+        persistentVolumeClaim:
+          claimName: addressbook-pvc
+
+---
+
+# PersistentVolumeClaim for storage
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: addressbook-pvc
+  namespace: directory
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 1Gi # Ensures only 1Gi of storage is used

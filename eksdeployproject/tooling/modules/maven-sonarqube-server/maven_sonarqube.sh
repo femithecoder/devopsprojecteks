@@ -191,45 +191,45 @@ sudo apt update && sudo apt upgrade -y
 # echo "sonarqube is now accessible via https://sonarqube.olorunfemilawal.com"
 
 
-# Update existing package list
-sudo apt update -y
+# # Update existing package list
+# sudo apt update -y
 
-# Install prerequisite packages for Docker
-sudo apt install -y \
-    apt-transport-https \
-    ca-certificates \
-    curl \
-    software-properties-common \
-    gnupg \
-    lsb-release
+# # Install prerequisite packages for Docker
+# sudo apt install -y \
+#     apt-transport-https \
+#     ca-certificates \
+#     curl \
+#     software-properties-common \
+#     gnupg \
+#     lsb-release
 
-# Add Docker's official GPG key
-curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /usr/share/keyrings/docker-archive-keyring.gpg
+# # Add Docker's official GPG key
+# curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /usr/share/keyrings/docker-archive-keyring.gpg
 
-# Set up the stable Docker repository
-echo \
-  "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] https://download.docker.com/linux/ubuntu \
-  $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
+# # Set up the stable Docker repository
+# echo \
+#   "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] https://download.docker.com/linux/ubuntu \
+#   $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
 
-# Update the package list to include Docker packages
-sudo apt update -y
+# # Update the package list to include Docker packages
+# sudo apt update -y
 
-# Install Docker Engine
-sudo apt install -y docker-ce docker-ce-cli containerd.io
+# # Install Docker Engine
+# sudo apt install -y docker-ce docker-ce-cli containerd.io
 
-# Enable Docker to start on boot
-sudo systemctl enable docker
+# # Enable Docker to start on boot
+# sudo systemctl enable docker
 
-# Start Docker service
-sudo systemctl start docker
+# # Start Docker service
+# sudo systemctl start docker
 
-# Verify Docker installation
-sudo docker --version
+# # Verify Docker installation
+# sudo docker --version
 
-# Optional: Add the current user to the 'docker' group to avoid using 'sudo' for Docker commands
-sudo usermod -aG docker $USER
+# # Optional: Add the current user to the 'docker' group to avoid using 'sudo' for Docker commands
+# sudo usermod -aG docker $USER
 
-echo "Docker installation completed successfully."
-echo "Please log out and log back in to apply group changes."
+# echo "Docker installation completed successfully."
+# echo "Please log out and log back in to apply group changes."
 
 

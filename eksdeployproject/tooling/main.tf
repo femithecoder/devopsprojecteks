@@ -29,12 +29,25 @@ module "maven-sonarqube-server" {
   subnet_id         = module.vpc_main.public_subnet_main
   main-region       = var.main-region
 
+}
+
+module "docker-server" {
+  source = "./modules/docker-server"
+  ami_id = var.ami_id
+  instance_type = var.instance_type
+  key_name = var.key_name
+  security_group_id = module.security_groups.security_groups
+  subnet_id         = module.vpc_main.public_subnet_main
+  main-region       = var.main-region
+  
+}
+
 #   #   db_name              = var.db_name
 #   #   db_username          = var.db_username
 #   #   db_password          = var.db_password
 #   #   db_subnet_group      = var.db_subnet_group
 #   #   db_security_group_id = var.db_security_group_id
-}
+
 
 # module "s3_dynamodb" {
 #   source = "./modules/s3-dynamodb"
