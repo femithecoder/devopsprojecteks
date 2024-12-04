@@ -20,20 +20,6 @@ spec:
         image: 548570664128.dkr.ecr.eu-west-2.amazonaws.com/addressbookapp:1.7.0
         ports:
         - containerPort: 8080
-        readinessProbe: 
-          httpGet:
-            path: /addressbook-1.0
-            port: 80
-          initialDelaySeconds: 20
-          periodSeconds: 10
-          failureThreshold: 3
-        livenessProbe:
-          httpGet:
-            path: /addressbook-1.0
-            port: 80
-          initialDelaySeconds: 60
-          periodSeconds: 30
-          failureThreshold: 3
         resources:
           requests:
             memory: "512Mi" # Minimum memory requested by the container
