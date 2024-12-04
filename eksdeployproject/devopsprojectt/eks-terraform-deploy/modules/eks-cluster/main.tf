@@ -62,13 +62,13 @@ module "eks" {
   manage_aws_auth_configmap = true
   # create_aws_auth_configmap = true
 
-  # aws_auth_users = [
-  #   {
-  #     userarn = "arn:aws:iam::548570664128:user/femithecoder"
-  #     username = "femi"
-  #     groups   = ["system:masters"]
-  #   }
-  # ]
+  aws_auth_users = [
+    {
+      userarn = "arn:aws:iam::548570664128:user/femithecoder"
+      username = "femi"
+      groups   = ["system:masters"]
+    }
+  ]
   aws_auth_roles = [
     {
       rolearn = "arn:aws:iam::548570664128:role/ec2-connect"
