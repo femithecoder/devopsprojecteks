@@ -1,6 +1,7 @@
 resource "aws_s3_bucket" "terraform_state" {
   bucket = var.bucket
-  #region = var.main-region
+  
+  force_destroy = true
 }
 
 resource "aws_s3_bucket_server_side_encryption_configuration" "sse" {
@@ -37,6 +38,7 @@ resource "aws_s3_bucket_lifecycle_configuration" "lifecycle_rule" {
     #   days = 30
     # }
   }
+  
 }
 resource "aws_dynamodb_table" "terraform_locks" {
   name         = var.table
