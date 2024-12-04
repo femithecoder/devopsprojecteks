@@ -22,13 +22,13 @@ spec:
         - containerPort: 8080
         readinessProbe: 
           httpGet:
-            path: /
+            path: /addressbook-1.0
             port: 8080
           initialDelaySeconds: 20
           periodSeconds: 10
         livenessProbe:
           httpGet:
-            path: /
+            path: /addressbook-1.0
             port: 8080
           initialDelaySeconds: 60
           periodSeconds: 30
