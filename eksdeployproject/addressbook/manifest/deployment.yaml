@@ -41,25 +41,3 @@ spec:
           limits:
             memory: "1Gi"   # Maximum memory allocated
             cpu: "500m"     # Maximum CPU allocated
-        volumeMounts:
-        - name: addressbook-storage
-          mountPath: /data
-      volumes:
-      - name: addressbook-storage
-        persistentVolumeClaim:
-          claimName: addressbook-pvc
-
----
-
-# PersistentVolumeClaim for storage
-apiVersion: v1
-kind: PersistentVolumeClaim
-metadata:
-  name: addressbook-pvc
-  namespace: directory
-spec:
-  accessModes:
-    - ReadWriteOnce
-  resources:
-    requests:
-      storage: 1Gi # Ensures only 1Gi of storage is used
