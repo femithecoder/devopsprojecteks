@@ -26,12 +26,14 @@ spec:
             port: 8080
           initialDelaySeconds: 20
           periodSeconds: 10
+          failureThreshold: 3
         livenessProbe:
           httpGet:
             path: /addressbook-1.0
             port: 8080
           initialDelaySeconds: 60
           periodSeconds: 30
+          failureThreshold: 3
         resources:
           requests:
             memory: "512Mi" # Minimum memory requested by the container
