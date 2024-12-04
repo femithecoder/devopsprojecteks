@@ -20,6 +20,8 @@ pipeline {
       steps {
         dir('eksdeployproject/addressbook'){
         sh "mvn clean package"
+        // Stash the WAR file after Maven build
+        stash includes: 'target/addressbook-1.0.war', name: 'war-file'
         }
       }
     }
@@ -47,6 +49,10 @@ pipeline {
       agent { node { label "docker-node" } }
       steps {
         dir('eksdeployproject/addressbook'){
+          // Unstash the WAR file
+          unstash 'war-file'
+          // Verify the WAR file is present
+          sh "ls -l target"
           sh "aws ecr get-login-password --region eu-west-2 | sudo docker login --username AWS --password-stdin ${aws_account}.dkr.ecr.eu-west-2.amazonaws.com"
           sh "sudo docker build -t addressbook ."
           sh "sudo docker tag addressbook:latest ${aws_account}.dkr.ecr.eu-west-2.amazonaws.com/addressbookapp:${params.ecr_tag}"
