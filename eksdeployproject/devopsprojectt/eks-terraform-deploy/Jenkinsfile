@@ -56,7 +56,7 @@ pipeline {
                         Let me know if the changes look okay.
                         Thanks,
                         Domain System Technologies,
-                        +44 7887768539''', 
+                        +447887768539''', 
                         from: 'femithecoder@gmail.com', 
                         replyTo: '', 
                         subject: 'Terraform Infra deployment completed!!!', 
